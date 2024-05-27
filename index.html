@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Електронний магазин</title>
+</head>
+<body>
+    <h1>Виберіть товари для КУПІВЛІ та підтвердіть вибір:</h1>
+    <h2>Контроль  виконання завдання. Запущено на інстансі з прив'язкою до git
+        <br>Виконано перевірку Actions на Git.
+        <br>Зклоновано до інстансу
+        <br><br>Вдало! Контрольні зміни 
+        <br><br>Контроль змін на момент захисту
+    </h2>
+    
+    <form action="process_order.php" method="post">
+        <div>
+            <input type="checkbox" id="item1" name="items[]" value="item1">
+            <label for="item1">Товар 1 - Ціна: 100 грн</label>
+        </div>
+        <div>
+            <input type="checkbox" id="item2" name="items[]" value="item2">
+            <label for="item2">Товар 2 - Ціна: 100 грн</label>
+        </div>
+
+        <div>
+            <input type="checkbox" id="item3" name="items[]" value="item3">
+            <label for="item3">Товар 3 - Ціна: 100 грн</label>
+        </div>
+        <div>
+            <input type="checkbox" id="item4" name="items[]" value="item4">
+            <label for="item4">Товар 4 - Ціна: 100 грн</label>
+        </div>
+        <div>
+            <input type="checkbox" id="item5" name="items[]" value="item5">
+            <label for="item5">Товар 5 - Ціна: 100 грн</label>
+        </div>
+        <div>
+            <input type="checkbox" id="item6" name="items[]" value="item6">
+            <label for="item6">Товар 6 - Ціна: 100 грн</label>
+        </div>
+        <div>
+            <input type="checkbox" id="item7" name="items[]" value="item7">
+            <label for="item7">Товар 7 - Ціна: 100 грн</label>
+        </div>
+    
+        <button type="submit">Підтвердити придбання</button>
+    </form>
+    
+    </form>
+</body>
+</html>

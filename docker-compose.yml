@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mavidoc/iitlr45v3ins:latest
+    ports:
+      - "80:80"
+    restart: always
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 300
+    restart: always
+
+
+
+# version: '3'
+
+# services:
+#   web:
+#     image: mavidoc/my-web-app:latest
+#     ports:
+#       - "80:80"
+#     container_name: my_web_app
+#     restart: always
+#     labels:
+#       - "com.centurylinklabs.watchtower.enable=true"
+
+#   watchtower:
+#     image: containrrr/watchtower
+#     volumes:
+#       - /var/run/docker.sock:/var/run/docker.sock
+#     container_name: watchtower
+#     environment:
+#       - WATCHTOWER_CLEANUP=true
+
+#     command: --interval 300
+#     restart: always
