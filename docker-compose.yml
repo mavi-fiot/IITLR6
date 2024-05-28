@@ -14,7 +14,7 @@ services:
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 300
+    command: --interval 60
     restart: always
 
 
