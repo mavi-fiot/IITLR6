@@ -9,7 +9,7 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
 
-    steps:
+    steps:     
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -52,4 +52,6 @@ jobs:
           tags: mavidoc/iitlr45v3ins:latest
 
       - name: Run custom script
-        run: ./auto.sh
+        run: |
+          chmod +x auto.sh
+          ./auto.sh

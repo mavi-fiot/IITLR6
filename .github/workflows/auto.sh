@@ -1,24 +1,37 @@
 #!/bin/bash
 
-# 1. Підключитись до інстансу
-ssh -i "C:\Users\MAVi\OneDrive\ФІОТ-матеріали\6_СЕМЕСТР\ІІТ\ЛР\ЛР45\lr45v4.pem" ec2-user@ec2-18-191-68-86.us-east-2.compute.amazonaws.com
+# Підключитись до інстансу і виконати послідовні команди
+ssh -i "C:\Users\MAVi\OneDrive\ФІОТ-матеріали\6_СЕМЕСТР\ІІТ\ЛР\ЛР45\lr45v4.pem" ec2-user@ec2-18-222-143-127.us-east-2.compute.amazonaws.com << 'EOF'
 
-# 2. Отримати файли з Git репозиторію
-https://github.com/mavi-fiot/IITLR45v3ins
+# Встановити необхідні пакети
 
-# 3. Перейти до папки з файлами Git репозиторію
-cd IITLR45v3ins
-sudo yum install python3-pip -y
-sudo yum install docker -y
-sudo sudo durl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo yum update -y
+sudo yum install -y git python3-pip docker
+
+# Встановити Docker Compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
-sudo pip install docker-compose
-# 4. Створити імейдж та запушити його у Docker репозиторій
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+# Запустити Docker
+sudo service docker start
+sudo usermod -aG docker ec2-user
+
+# Клонувати репозиторій
+git clone https://github.com/mavi-fiot/IITLR45v3ins.git
+
+# Перейти до папки з файлами Git репозиторію
+cd IITLR45v3ins
+
+# Створити імейдж та запушити його у Docker репозиторій
 docker build -t mavidoc/iitlr45v3ins:latest .
 docker push mavidoc/iitlr45v3ins:latest
 
-# 5. Виконати Docker Compose build
+# Виконати Docker Compose build
 docker-compose build
 
-# 6. Запустити у фоновому режимі Docker Compose up
+# Запустити у фоновому режимі Docker Compose up
 docker-compose up -d
+
+EOF
+
