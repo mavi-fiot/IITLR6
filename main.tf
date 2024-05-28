@@ -4,20 +4,20 @@ provider "aws" {
 }
 
 
-resource "aws_instance" "lr6" {
+resource "aws_instance" "lr61" {
   ami = "ami-02bf8ce06a8ed6092" 
   instance_type = "t2.micro"
   key_name = "lr45v4"
  
   tags = {
-      Name = "lr6"
+      Name = "lr61"
     }
 
     # Встановлення публічного IP-адреси
   associate_public_ip_address = true
 
     # Зв'язування з безпечною групою
-  vpc_security_group_ids = [aws_security_group.example_security_group.id]
+  vpc_security_group_ids = [aws_security_group.lr6_security_group.id]
 }
 
 # Опис мережевих ресурсів
@@ -31,8 +31,8 @@ resource "aws_subnet" "example_subnet" {
 }
 
 # Опис правил файрвола
-resource "aws_security_group" "example_security_group" {
-    name        = "example-security-group"
+resource "aws_security_group" "lr6_security_group" {
+    name        = "lr6-security-group"
     description = "Allow inbound traffic on port 80"
   
     ingress {
@@ -40,5 +40,12 @@ resource "aws_security_group" "example_security_group" {
         to_port     = 80
         protocol    = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    ingress {
+    from_port   = 8033
+    to_port     = 8033
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
     }
 }

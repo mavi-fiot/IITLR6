@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Підключитись до інстансу і виконати послідовні команди
-ssh -i "C:\Users\MAVi\OneDrive\ФІОТ-матеріали\6_СЕМЕСТР\ІІТ\ЛР\ЛР45\lr45v4.pem" ec2-user@ec2-18-222-143-127.us-east-2.compute.amazonaws.com << 'EOF'
+ssh -i "C:\Users\MAVi\OneDrive\ФІОТ-матеріали\6_СЕМЕСТР\ІІТ\ЛР\ЛР45\lr45v4.pem" -p 8033 ec2-user@ec2-18-222-143-127.us-east-2.compute.amazonaws.com
 
 # Встановити необхідні пакети
 
