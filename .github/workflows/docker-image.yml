@@ -1,4 +1,3 @@
-
 name: Docker Image CI
 
 on:
@@ -29,6 +28,26 @@ jobs:
         context: .
         push: true
         tags: mavidoc/iitlr45v3ins:latest
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+
+    - name: Install Terraform
+      run: |
+        sudo apt-get update && sudo apt-get install -y unzip
+        curl -LO https://releases.hashicorp.com/terraform/1.0.0/terraform_1.0.0_linux_amd64.zip
+        unzip terraform_1.0.0_linux_amd64.zip
+        sudo mv terraform /usr/local/bin/
+
+    - name: Initialize Terraform
+      run: terraform init
+
+    - name: Apply Terraform
+      run: terraform apply -auto-approve
 
 
 
