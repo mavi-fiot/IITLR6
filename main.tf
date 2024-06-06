@@ -82,8 +82,8 @@ provider "aws" {
   shared_credentials_files = ["C:/Users/MAVi/.aws/credentials"]
 }
 
-resource "aws_security_group" "lr6_security_group" {
-  name        = "lr6-security-group"
+resource "aws_security_group" "lr651_security_group" {
+  name        = "lr651-security-group"
   description = "Allow inbound traffic on ports 80 and 8033"
 
   ingress {
@@ -146,7 +146,7 @@ resource "aws_security_group" "lr6_security_group" {
 #   ]
 # }
 
-resource "aws_instance" "lr63aws" {
+resource "aws_instance" "lr651aws" {
   # ... інші параметри ...
 
   # Замість null_resource використовуємо local-exec
@@ -160,12 +160,12 @@ resource "aws_instance" "lr63aws" {
   key_name      = "lr45v4"
 
   tags = {
-    Name = "lr63aws"
+    Name = "lr651aws"
   }
   
   # Зберігаємо асоціацію з публічною IP-адресою та безпечною групою
   associate_public_ip_address = true
-  vpc_security_group_ids = [aws_security_group.lr6_security_group.id]
+  vpc_security_group_ids = [aws_security_group.lr651_security_group.id]
 }
 
 
