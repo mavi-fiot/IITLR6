@@ -1,15 +1,17 @@
+
+
 provider "aws" {
   region                   = "us-east-2"
   shared_credentials_files = ["C:/Users/MAVi/.aws/credentials"]
 }
 
 resource "aws_vpc" "example_vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = "172.31.0.0/16"
 }
 
 resource "aws_subnet" "example_subnet" {
-  vpc_id                  = aws_vpc.example_vpc.id
-  cidr_block              = "10.0.1.0/24"
+  vpc_id     = aws_vpc.example_vpc.id
+  cidr_block = "172.31.32.0/20"
   map_public_ip_on_launch = true
 }
 
@@ -70,12 +72,12 @@ resource "aws_security_group" "lr631_security_group" {
 }
 
 resource "aws_instance" "lr631" {
-  ami           = "ami-02bf8ce06a8ed6092"
+  ami           = "ami-05803413c51f242b7"
   instance_type = "t2.micro"
   key_name      = "lr45v4"
 
   tags = {
-    Name = "lr631aws_nginx"
+    Name = "lr631aws_ubuntu"
   }
 
   user_data = <<-EOF
@@ -129,7 +131,9 @@ resource "aws_instance" "lr631" {
             EOF
 
   associate_public_ip_address = true
-  vpc_security_group_ids      = [aws_security_group.lr631_security_group.id]
+  vpc_security_group_ids = [aws_security_group.lr631_security_group.id]
+#   vpc_security_group_ids = ["vpc-0c7b23afcf509c8a1"]
+
 }
 
 
